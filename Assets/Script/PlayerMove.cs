@@ -2,25 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
+    /// <summary>
+    /// プレイヤーの動く速度
+    /// </summary>
+    [SerializeField] float _movePower = 1f;
 
-    private Vector2 _dir = default;
+    /// <summary>
+    /// プレイヤーのジャンプ力
+    /// </summary>
+    [SerializeField] float _jumpPower = 1f;
 
-    Transform _myTransform;
+    /// <summary>
+    /// 弾丸のオブジェクト
+    /// </summary>
+    [SerializeField] GameObject _bullet = null;
 
     void Update()
     {
-        _myTransform = this.transform;
-        float x = 0;
-        float y = 0;
-        _dir = new Vector2(x, y);
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        var inputMove = context.ReadValue<Vector2>();
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(-_movePower, 0f, 0f);
+            Debug.Log("左");
+        }//キーの入力があれば左へ進む
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(_movePower, 0f, 0f);
+            Debug.Log("右");
+        }//キーの入力があれば右へ進む
     }
 
     public void OnJump(InputAction.CallbackContext context)
