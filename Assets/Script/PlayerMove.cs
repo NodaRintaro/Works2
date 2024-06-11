@@ -1,47 +1,88 @@
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚Ì“®‚­‘¬“x
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•é€Ÿåº¦
     /// </summary>
     [SerializeField] float _movePower = 1f;
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚ÌƒWƒƒƒ“ƒv—Í
+    /// æœ€åˆã®ã‚¸ãƒ£ãƒ³ãƒ—åŠ›
     /// </summary>
-    [SerializeField] float _jumpPower = 1f;
+    [SerializeField] float _firstJumpPower = 1f;
 
     /// <summary>
-    /// ’eŠÛ‚ÌƒIƒuƒWƒFƒNƒg
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¸ãƒ£ãƒ³ãƒ—åŠ›
+    /// </summary>
+    private float _jumpPower;
+
+    /// <summary>
+    /// å¼¾ä¸¸ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField] GameObject _bullet = null;
 
+    /// <summary>
+    /// ã‚¸ãƒ£ãƒ³ãƒ—ã®å›æ•°åˆ¶é™
+    /// </summary>
+    [SerializeField] int _maxJumpCount = 2;
+
+    /// <summary>
+    /// ã‚¸ãƒ£ãƒ³ãƒ—ã‚’ã—ãŸå›æ•°
+    /// </summary>
+    private int _jumpCount = 0;
+
+    /// <summary>
+    /// è¨­ç½®åˆ¤å®š
+    /// </summary>
+    bool _isGround = true;
+
+    private Vector3 _velocity;
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        transform.position += _velocity *_movePower * Time.deltaTime;
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç§»å‹•å‡¦ç†
+
+        transform.Translate(0f,_jumpPower,0f);
+
+        if (transform.position.y > -2.5 && _isGround == false )
         {
-            transform.Translate(-_movePower, 0f, 0f);
-            Debug.Log("¶");
-        }//ƒL[‚Ì“ü—Í‚ª‚ ‚ê‚Î¶‚Öi‚Ş
-        if (Input.GetKey(KeyCode.RightArrow))
+            _jumpPower -= Time.deltaTime;
+        }
+        else
         {
-            transform.Translate(_movePower, 0f, 0f);
-            Debug.Log("‰E");
-        }//ƒL[‚Ì“ü—Í‚ª‚ ‚ê‚Î‰E‚Öi‚Ş
+            _jumpPower = 0f;
+            _isGround = true;
+            _jumpCount = 0;
+        }
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnMove(InputValue value)
     {
+        var axis = value.Get<Vector2>();
 
+        _velocity = new Vector3(axis.x, 0, 0);
     }
 
-    public void OnFire(InputAction.CallbackContext context)
+    public void OnFire()
     {
+        Instantiate(_bullet, this.transform.position, Quaternion.identity);
+        Debug.Log("ç”Ÿæˆ");
+    }
 
+    public void OnJump()
+    {
+        if(_jumpCount != _maxJumpCount)
+        {
+            _jumpPower = _firstJumpPower;
+            _jumpCount++;
+            _isGround = false;
+        }
     }
 }

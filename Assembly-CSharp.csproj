@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\PlayerMove.cs" />
+    <Compile Include="Assets\Script\BulletMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

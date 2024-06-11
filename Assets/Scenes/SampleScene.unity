@@ -293,8 +293,8 @@ Transform:
   m_GameObject: {fileID: 865147398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0138, y: -4.8257, z: 0}
-  m_LocalScale: {x: 19.660847, y: 3.316498, z: 1}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalScale: {x: 20, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -379,7 +379,7 @@ Transform:
   m_GameObject: {fileID: 960853084}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.94, y: -2.69, z: 0}
+  m_LocalPosition: {x: 0, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -397,6 +397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f489b0ee34117c4fa3ae3e7c3ec9c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movePower: 10
+  _firstJumpPower: 0.13
+  _bullet: {fileID: 3719392338146685204, guid: 2c7d7567a67e2f84b9487e8aadc53860, type: 3}
+  _maxJumpCount: 2
 --- !u!114 &960853088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,8 +413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2a1311dbd72481346a09b3c7b726928d, type: 3}
-  m_NotificationBehavior: 2
+  m_Actions: {fileID: -944628639613478452, guid: cfcca27163f92a94a843134918642cf8, type: 3}
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -435,32 +439,64 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 226ead3b-9e3a-4822-980d-f63301d84c7f
-    m_ActionName: PlayerAction/OnJump[/Keyboard/space]
+      m_Calls: []
+    m_ActionId: 40b242c2-9f67-418c-a9a7-8bfba5c47777
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: f405ad3b-d858-45c4-b992-2ff228959ba3
-    m_ActionName: PlayerAction/OnMove
+    m_ActionId: 45ede6bb-e874-421d-b8ba-b6ce7a5b7e37
+    m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 110f12e4-6436-4030-8f42-c9587ae6b233
-    m_ActionName: PlayerAction/OnFire
+    m_ActionId: 41a8ec8f-d5dd-4bd7-9c8b-7c7469c7bbcc
+    m_ActionName: Player/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 540c87cf-79d3-4d08-9517-a34db8fb7345
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37e8a61b-3fb3-4865-9444-af5567a7e50a
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4ce86536-ce4e-4647-b63a-e4c104e9490a
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e0e53a62-be08-49c2-8b96-0be8fed76e0e
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 089f2e30-fe7f-4e39-9e34-240c8e5f7a81
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a244ad36-8b05-4980-849b-b14fa87ee14d
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5f6900ce-8380-4eac-9982-c9b2ffbef8a4
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7ba2a5f5-6894-49db-8470-5ad9f56fe202
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b3504e1f-6407-4e3c-842b-434098bd45cf
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e95596db-87d6-481f-a56b-aaa16cf810b2
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 601636d1-8ccb-48e8-bd01-7980fdc9761e
+    m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerAction
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
