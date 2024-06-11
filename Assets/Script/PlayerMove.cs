@@ -54,13 +54,13 @@ public class PlayerMove : MonoBehaviour
         if (transform.position.y > -2.5 && _isGround == false )
         {
             _jumpPower -= Time.deltaTime;
-        }
+        }//空中にいる間徐々にジャンプ力を減少させて行く
         else
         {
             _jumpPower = 0f;
             _isGround = true;
             _jumpCount = 0;
-        }
+        }//着地したらジャンプ力、ジャンプカウント、設置判定をリセット
     }
 
     public void OnMove(InputValue value)
@@ -68,13 +68,13 @@ public class PlayerMove : MonoBehaviour
         var axis = value.Get<Vector2>();
 
         _velocity = new Vector3(axis.x, 0, 0);
-    }
+    }//InputSystemでvalueを受け取って移動
 
     public void OnFire()
     {
         Instantiate(_bullet, this.transform.position, Quaternion.identity);
         Debug.Log("生成");
-    }
+    }//右クリックされたらBulletを生成
 
     public void OnJump()
     {
@@ -84,5 +84,5 @@ public class PlayerMove : MonoBehaviour
             _jumpCount++;
             _isGround = false;
         }
-    }
+    }//InputSystemでジャンプの入力があればjumpPowerにジャンプ力の初期値を渡す
 }
