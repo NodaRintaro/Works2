@@ -73,7 +73,7 @@ public class PlayerMove : MonoBehaviour
     public void OnFire()
     {
         Instantiate(_bullet, this.transform.position, Quaternion.identity);
-        Debug.Log("生成");
+        Debug.Log("生成!");
     }//右クリックされたらBulletを生成
 
     public void OnJump()
