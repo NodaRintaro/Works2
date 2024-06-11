@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movePower: 10
-  _firstJumpPower: 0.13
+  _firstJumpPower: 0.08
   _bullet: {fileID: 3719392338146685204, guid: 2c7d7567a67e2f84b9487e8aadc53860, type: 3}
   _maxJumpCount: 2
 --- !u!114 &960853088

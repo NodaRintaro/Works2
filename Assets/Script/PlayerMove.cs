@@ -53,7 +53,7 @@ public class PlayerMove : MonoBehaviour
 
         if (transform.position.y > -2.5 && _isGround == false )
         {
-            _jumpPower -= Time.deltaTime;
+            _jumpPower -= Time.deltaTime/2;
         }//空中にいる間徐々にジャンプ力を減少させて行く
         else
         {
