@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Utilities;
-using UnityEngine.UIElements;
+
 
 public class PlayerMove : MonoBehaviour
 {
@@ -14,14 +13,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float _movePower = 1f;
 
     /// <summary>
-    /// 最初のジャンプ力
+    /// ジャンプ力
     /// </summary>
-    [SerializeField] float _firstJumpPower = 1f;
+    [SerializeField] float _jumpPower = 0.1f;
 
     /// <summary>
     /// プレイヤーのジャンプ力
     /// </summary>
-    private float _jumpPower;
+    private float _riseSpeed;
 
     /// <summary>
     /// 弾丸のオブジェクト
@@ -49,15 +48,15 @@ public class PlayerMove : MonoBehaviour
         transform.position += _velocity *_movePower * Time.deltaTime;
         // オブジェクトの移動処理
 
-        transform.Translate(0f,_jumpPower,0f);
+        transform.Translate(0f,_riseSpeed,0f);
 
         if (transform.position.y > -2.5 && _isGround == false )
         {
-            _jumpPower -= Time.deltaTime/2;
+            _riseSpeed -= Time.deltaTime/2;
         }//空中にいる間徐々にジャンプ力を減少させて行く
         else
         {
-            _jumpPower = 0f;
+            _riseSpeed = 0f;
             _isGround = true;
             _jumpCount = 0;
         }//着地したらジャンプ力、ジャンプカウント、設置判定をリセット
@@ -68,7 +67,7 @@ public class PlayerMove : MonoBehaviour
         var axis = value.Get<Vector2>();
 
         _velocity = new Vector3(axis.x, 0, 0);
-    }//InputSystemでvalueを受け取って移動
+    }//移動
 
     public void OnFire()
     {
@@ -80,7 +79,7 @@ public class PlayerMove : MonoBehaviour
     {
         if(_jumpCount != _maxJumpCount)
         {
-            _jumpPower = _firstJumpPower;
+            _riseSpeed = _jumpPower;
             _jumpCount++;
             _isGround = false;
         }
