@@ -1,39 +1,39 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAction : MonoBehaviour
 {
     /// <summary>
-    /// ƒ^[ƒQƒbƒg‚Æ‚È‚éƒvƒŒƒCƒ„[‚ÌƒIƒuƒWƒFƒNƒg
+    /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãªã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField] GameObject _targetObject = null;
     /// <summary>
-    /// ’eŠÛ‚ÌƒIƒuƒWƒFƒNƒg
+    /// å¼¾ä¸¸ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField] GameObject _bullet = null;
     /// <summary>
-    /// ƒ^[ƒQƒbƒg‚É‚Ş‚¯‚Ä”­–C‚ğŠJn‚·‚é‹——£
+    /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«ã‚€ã‘ã¦ç™ºç ²ã‚’é–‹å§‹ã™ã‚‹è·é›¢
     /// </summary>
     [SerializeField] float _rangeDistance = 5;
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®è·é›¢
     /// </summary>
     private float _distance;
     /// <summary>
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ÌˆÊ’u
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½ç½®
     /// </summary>
     private Vector2 _thisObjectPosition;
     /// <summary>
-    /// ƒ^[ƒQƒbƒg‚Æ‚È‚éƒvƒŒƒCƒ„[‚ÌˆÊ’u
+    /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãªã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®
     /// </summary>
     private Vector2 _targetObjectPosition;
     /// <summary>
-    /// Bullet‚Ì”­ËƒCƒ“ƒ^[ƒoƒ‹
+    /// Bulletã®ç™ºå°„ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«
     /// </summary>
     private float _fireDistance = 1;
     /// <summary>
-    /// ƒ^ƒCƒ}[
+    /// ã‚¿ã‚¤ãƒãƒ¼
     /// </summary>
     private float _timer = 0;
 
@@ -52,5 +52,5 @@ public class EnemyAction : MonoBehaviour
             _timer = 0;
             Instantiate(_bullet,_thisObjectPosition, Quaternion.identity);
         }
-    }//ƒvƒŒƒCƒ„[‚ªË’ö‹——£‚É“ü‚Á‚½‚ç”­–C‚ğŠJn‚·‚éˆ—
+    }//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå°„ç¨‹è·é›¢ã«å…¥ã£ãŸã‚‰ç™ºç ²ã‚’é–‹å§‹ã™ã‚‹å‡¦ç†
 }

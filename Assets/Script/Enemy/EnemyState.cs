@@ -1,18 +1,20 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyState : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private static EnemyState _instance = new EnemyState();
+    public static EnemyState Instance => _instance;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private int _enemyLife = 3;
+
+    public void EnemyLife()
     {
-        
+        _enemyLife -= 1;
+        if (_enemyLife == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

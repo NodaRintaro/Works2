@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +9,12 @@ public class PlayerStatus : MonoBehaviour
 
     [SerializeField] private int _life = 5;
 
-    public int Life(int damage)
+    public void Life(int damage)
     {
-        return _life - damage;
+        _life -= damage;
+        if(_life == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
