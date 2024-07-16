@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static BulletType;
 
 public class BulletCollider : MonoBehaviour
 {
     /// <summary>
-    /// プレイヤーのオブジェクト
+    /// ターゲットのリスト
     /// </summary>
-    [SerializeField] GameObject _targetObject;
+    [SerializeField] List<GameObject> _targetList = new List<GameObject>();
     /// <summary>
     /// このオブジェクトの位置
     /// </summary>
@@ -36,26 +35,30 @@ public class BulletCollider : MonoBehaviour
     /// <summary>
     /// 球の種類
     /// </summary>
-    private BulletType _bulletType;
+    [SerializeField] BulletType _bulletType;
+    /// <summary>
+    /// ターゲットのオブジェクト
+    /// </summary>
+    private GameObject _targetObject = null;
 
     private void Start()
     {
-        _bulletType = this.gameObject.GetComponent<BulletType>();
+        _bulletType = GetComponent<BulletType>();
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
-        if (CheckHit() && _bulletType._bulletGroup == BulletGroup.Player)
+        if (_bulletType._bulletGroup == BulletType.BulletGroup.Enemy)
         {
-            PlayerStatus.Instance.Life(1);
+            PlayerStatus.Instance.Damage(1);
             Destroy(this.gameObject);
-            if(_bulletType._bulletGroup == BulletGroup.Player)
-                PlayerStatus.Instance.Life(1);
-            //プレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
-            else if (_bulletType._bulletGroup == BulletGroup.Enemy)
-                EnemyState.Instance.EnemyLife();
-            //敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
-        }
+        }//プレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
+        else if (_bulletType._bulletGroup == BulletType.BulletGroup.Player)
+        {
+            EnemyState.Instance.EnemyLife();
+            Destroy(this.gameObject);
+        }//敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
+        Debug.Log("hit");
     }
 
     public bool CheckHit()
@@ -75,11 +78,15 @@ public class BulletCollider : MonoBehaviour
         if (_xDistance < _thisObjectScale + _playerRadius && _yDistance < _thisObjectScale + _playerRadius)
         {
             return true;
-            Debug.Log("hit");
         }
         else
         {
             return false;
         }
     }//プレイヤーと当たったらtrueを返す
+
+    public void CheckDistance()
+    {
+
+    }
 }

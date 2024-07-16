@@ -9,7 +9,7 @@ public class PlayerStatus : MonoBehaviour
 
     [SerializeField] private int _life = 5;
 
-    public void Life(int damage)
+    public void Damage(int damage)
     {
         _life -= damage;
         if(_life == 0)

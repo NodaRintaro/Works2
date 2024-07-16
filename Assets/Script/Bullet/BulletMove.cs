@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 
-class BulletMove : BulletType
+class BulletMove : MonoBehaviour
 { 
     [SerializeField] float _bulletPower = 1f;
 
+    [SerializeField] BulletType _bulletType;
+
     void Update()
     {
-        if (_bulletGroup == BulletGroup.Player)
+        if (_bulletType._bulletGroup == BulletType.BulletGroup.Player)
         {
             transform.Translate(_bulletPower, 0f, 0f);
         }
-        else if (_bulletGroup == BulletGroup.Enemy)
+        else if (_bulletType._bulletGroup == BulletType.BulletGroup.Enemy)
         {
             transform.Translate(-_bulletPower, 0f, 0f);
         }
