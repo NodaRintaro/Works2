@@ -4,8 +4,6 @@ class BulletMove : MonoBehaviour
 { 
     [SerializeField] float _bulletPower = 1f;
 
-    [SerializeField] BulletType _bulletType;
-
     void Update()
     {
         if (_bulletType._bulletGroup == BulletType.BulletGroup.Player)

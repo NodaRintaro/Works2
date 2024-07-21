@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyState : MonoBehaviour
+public class EnemyStatus : MonoBehaviour
 {
-    private static EnemyState _instance = new EnemyState();
-    public static EnemyState Instance => _instance;
-
     [SerializeField] private int _enemyLife = 3;
 
     public void EnemyLife()

@@ -9,9 +9,9 @@ public class PlayerStatus : MonoBehaviour
 
     [SerializeField] private int _life = 5;
 
-    public void Damage(int damage)
+    public void Damage()
     {
-        _life -= damage;
+        _life -= 1;
         if(_life == 0)
         {
             Destroy(this.gameObject);

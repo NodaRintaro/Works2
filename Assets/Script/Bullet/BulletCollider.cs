@@ -35,35 +35,33 @@ public class BulletCollider : MonoBehaviour
     /// <summary>
     /// 球の種類
     /// </summary>
-    [SerializeField] BulletType _bulletType;
+    [SerializeField] public BulletGroup _bulletGroup;
     /// <summary>
     /// ターゲットのオブジェクト
     /// </summary>
     private GameObject _targetObject = null;
 
-    private void Start()
-    {
-        _bulletType = GetComponent<BulletType>();
-    }
-
     public void FixedUpdate()
     {
-        if (_bulletType._bulletGroup == BulletType.BulletGroup.Enemy)
+        if (CheckHit(_targetObject))
         {
-            PlayerStatus.Instance.Damage(1);
-            Destroy(this.gameObject);
-        }//プレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
-        else if (_bulletType._bulletGroup == BulletType.BulletGroup.Player)
-        {
-            EnemyState.Instance.EnemyLife();
-            Destroy(this.gameObject);
-        }//敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
-        Debug.Log("hit");
+            if (_bulletGroup == BulletGroup.Enemy)
+            {
+                PlayerStatus.Instance.Damage();
+                Destroy(this.gameObject);
+            }//プレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
+            else if (_bulletGroup == BulletGroup.Player)
+            {
+                _targetObject.EnemyState.Damage(1);
+                Destroy(this.gameObject);
+            }//敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
+            Debug.Log("hit");
+        }
     }
 
-    public bool CheckHit()
+    public bool CheckHit(GameObject target)
     {
-        _targetPos = _targetObject.transform.position;
+        _targetPos = target.transform.position;
         _thisPos = this.transform.position;
         _xDistance = _thisPos.x - _targetPos.x;
         _yDistance = _thisPos.y - _targetPos.y;
@@ -88,5 +86,11 @@ public class BulletCollider : MonoBehaviour
     public void CheckDistance()
     {
 
+    }
+
+    public enum BulletGroup
+    {
+        Enemy,
+        Player
     }
 }
