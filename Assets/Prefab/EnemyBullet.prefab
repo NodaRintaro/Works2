@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 554479834011574508}
   - component: {fileID: 8781099049678731121}
-  - component: {fileID: 1835090792015872328}
   - component: {fileID: 3559033454809287442}
   - component: {fileID: -853577059873585726}
   m_Layer: 0
@@ -87,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1835090792015872328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3719392338146685204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48779f60673696542a547f2702e4e14e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bulletGroup: 0
 --- !u!114 &3559033454809287442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPower: 0.05
-  _bulletType: {fileID: 0}
+  _moveRight: 1
 --- !u!114 &-853577059873585726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,11 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c9ed9355a5484ebee17f4c783507f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetObject: {fileID: 1395123527332283271, guid: 114ef5bd72b464e49915ff283f979ee8, type: 3}
+  _targetList:
+  - {fileID: 0}
   _thisPos: {x: 0, y: 0}
   _targetPos: {x: 0, y: 0}
   _thisObjectScale: 0.25
   _playerRadius: 0.5
   _xDistance: 0
   _yDistance: 0
-  _bulletType: {fileID: 0}
+  _bulletGroup: 0

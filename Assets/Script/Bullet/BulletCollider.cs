@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletCollider : MonoBehaviour
 {
-    /// <summary>
-    /// ターゲットのリスト
-    /// </summary>
-    [SerializeField] List<GameObject> _targetList = new List<GameObject>();
+    public EnemyList _enemyList = new EnemyList();
     /// <summary>
     /// このオブジェクトの位置
     /// </summary>
@@ -35,27 +33,39 @@ public class BulletCollider : MonoBehaviour
     /// <summary>
     /// 球の種類
     /// </summary>
-    [SerializeField] public BulletGroup _bulletGroup;
+    [SerializeField] BulletGroup _bulletGroup;
     /// <summary>
     /// ターゲットのオブジェクト
     /// </summary>
     private GameObject _targetObject = null;
 
+    private void Awake()
+    {
+        if (_bulletGroup == BulletGroup.Enemy)
+        {
+            _targetObject = GameObject.FindWithTag("Player");
+        }
+    }
+
     public void FixedUpdate()
     {
-        if (CheckHit(_targetObject))
+        switch (_bulletGroup)
         {
-            if (_bulletGroup == BulletGroup.Enemy)
-            {
-                PlayerStatus.Instance.Damage();
-                Destroy(this.gameObject);
-            }//プレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
-            else if (_bulletGroup == BulletGroup.Player)
-            {
-                _targetObject.EnemyState.Damage(1);
-                Destroy(this.gameObject);
-            }//敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
-            Debug.Log("hit");
+            case BulletGroup.Enemy:
+                if (CheckHit(_targetObject))
+                {
+                    Destroy(this.gameObject);
+                    Debug.Log("Hit");
+                }//敵の球がプレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
+                break;
+            case BulletGroup.Player:
+                CheckTarget(EnemyList.Instance._targetList, _targetObject);
+                if (CheckHit(_targetObject))
+                {
+                    Destroy(this.gameObject);
+                    Debug.Log("Hit");
+                }//プレイヤーの球が敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
+                break;
         }
     }
 
@@ -83,10 +93,24 @@ public class BulletCollider : MonoBehaviour
         }
     }//プレイヤーと当たったらtrueを返す
 
-    public void CheckDistance()
+    public void CheckTarget(List<GameObject>targetList,GameObject currentTarget)
     {
-
-    }
+        float closestDistance = 1000;
+        float currentDistance;
+        _thisPos = this.transform.position;
+        foreach(GameObject target in targetList)
+        {
+            if(target != null)
+            {
+                currentDistance = Vector3.Distance(target.transform.position, _thisPos);
+                if (currentDistance < closestDistance)
+                {
+                    closestDistance = currentDistance;
+                    currentTarget = target;
+                }
+            }
+        }
+    }//ターゲットが複数いた場合一番距離が近いものをターゲットとする
 
     public enum BulletGroup
     {
