@@ -6,7 +6,7 @@ public class EnemyStatus : MonoBehaviour
 {
     [SerializeField] private int _enemyLife = 3;
 
-    public void EnemyLife()
+    public void EnemyDamege()
     {
         _enemyLife -= 1;
         if (_enemyLife == 0)

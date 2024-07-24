@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPower: 0.05
-  _moveRight: 1
+  _moveRight: 0
 --- !u!114 &-853577059873585726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c9ed9355a5484ebee17f4c783507f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetList:
-  - {fileID: 0}
+  _enemyList:
+    _targetList: []
   _thisPos: {x: 0, y: 0}
   _targetPos: {x: 0, y: 0}
   _thisObjectScale: 0.25

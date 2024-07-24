@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Unity.VisualScripting;
 
 public class BulletCollider : MonoBehaviour
 {
@@ -44,10 +44,14 @@ public class BulletCollider : MonoBehaviour
         if (_bulletGroup == BulletGroup.Enemy)
         {
             _targetObject = GameObject.FindWithTag("Player");
+        }// プレイヤーのオブジェクトを探す
+        else
+        {
+            _targetObject = CheckTarget(EnemyList.Instance._targetList);
         }
     }
 
-    public void FixedUpdate()
+    public void LateUpdate()
     {
         switch (_bulletGroup)
         {
@@ -59,8 +63,7 @@ public class BulletCollider : MonoBehaviour
                 }//敵の球がプレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
                 break;
             case BulletGroup.Player:
-                CheckTarget(EnemyList.Instance._targetList, _targetObject);
-                if (CheckHit(_targetObject))
+                if (CheckHit(CheckTarget(EnemyList.Instance._targetList)))
                 {
                     Destroy(this.gameObject);
                     Debug.Log("Hit");
@@ -91,27 +94,31 @@ public class BulletCollider : MonoBehaviour
         {
             return false;
         }
-    }//プレイヤーと当たったらtrueを返す
+    }//ターゲットと当たったらtrueを返す当たり判定
 
-    public void CheckTarget(List<GameObject>targetList,GameObject currentTarget)
+    public GameObject CheckTarget(List<GameObject>targetList)
     {
-        float closestDistance = 1000;
-        float currentDistance;
-        _thisPos = this.transform.position;
-        foreach(GameObject target in targetList)
+        float targetDistance = default;
+        foreach (GameObject target in targetList)
         {
-            if(target != null)
+            float thisDistance = Vector3.Distance(target.transform.position, this.transform.position);
+            if (targetDistance > thisDistance)
             {
-                currentDistance = Vector3.Distance(target.transform.position, _thisPos);
-                if (currentDistance < closestDistance)
-                {
-                    closestDistance = currentDistance;
-                    currentTarget = target;
-                }
+                targetDistance = thisDistance;
+                _targetObject = target;
+            }
+            else if (targetDistance == default)
+            {
+                targetDistance = thisDistance;
+                _targetObject = target;
             }
         }
-    }//ターゲットが複数いた場合一番距離が近いものをターゲットとする
+        return _targetObject;
+    }//一番距離が近い敵をターゲットにする
 
+    /// <summary>
+    /// 球がプレイヤーかエネミーどちらから放たれたものかの判定
+    /// </summary>
     public enum BulletGroup
     {
         Enemy,
