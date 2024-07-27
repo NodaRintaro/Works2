@@ -62,9 +62,8 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Enemy\EnemyAction.cs" />
     <Compile Include="Assets\Script\Bullet\BulletCollider.cs" />
-    <Compile Include="Assets\Script\Enemy\EnemyCollider.cs" />
     <Compile Include="Assets\Script\Player\PlayerStatus.cs" />
-    <Compile Include="Assets\Script\Bullet\EnemyList.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyList.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyStatus.cs" />
     <Compile Include="Assets\Script\Player\PlayerMove.cs" />
     <Compile Include="Assets\Script\Bullet\BulletMove.cs" />

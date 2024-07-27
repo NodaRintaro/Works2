@@ -32,10 +32,10 @@ public class EnemyList:MonoBehaviour
                 break;
             }
         }
-    }
+    }//Às‚ÉEnemy‚ğæ“¾
 
     private void ChangeTag (string newTag, GameObject changeTagObject)
     {
         changeTagObject.tag = newTag;
-    }
+    }//–³ŒÀ‚É“¯‚¶Object‚ğList‚ÉAdd‚µ‘±‚¯‚È‚¢‚æ‚¤‚É‘Îô‚Æ‚µ‚ÄAdd‚µ‚½Object‚ÌTag‚ğ‚©‚¦‚é
 }

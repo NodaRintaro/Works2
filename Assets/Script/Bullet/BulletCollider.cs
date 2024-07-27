@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
-using System.Linq;
-using Unity.VisualScripting;
+
 
 public class BulletCollider : MonoBehaviour
 {
-    public EnemyList _enemyList = new EnemyList();
+    public EnemyList _enemyList;
     /// <summary>
     /// このオブジェクトの位置
     /// </summary>
@@ -38,16 +38,29 @@ public class BulletCollider : MonoBehaviour
     /// ターゲットのオブジェクト
     /// </summary>
     private GameObject _targetObject = null;
+    /// <summary>
+    /// enemyのStatus
+    /// </summary>
+    private EnemyStatus _enemyStatus;
 
-    private void Awake()
+    private void Start()
     {
+        _enemyList = FindAnyObjectByType<EnemyList>();
         if (_bulletGroup == BulletGroup.Enemy)
         {
             _targetObject = GameObject.FindWithTag("Player");
         }// プレイヤーのオブジェクトを探す
         else
         {
-            _targetObject = CheckTarget(EnemyList.Instance._targetList);
+            CheckTarget(_enemyList._targetList, _targetObject);
+        }// 最初のtargetを探す
+    }
+
+    public async void FixedUpdate()
+    {
+        if (_bulletGroup == BulletGroup.Player)
+        {
+            CheckTarget(_enemyList._targetList, _targetObject);
         }
     }
 
@@ -58,13 +71,16 @@ public class BulletCollider : MonoBehaviour
             case BulletGroup.Enemy:
                 if (CheckHit(_targetObject))
                 {
+                    PlayerStatus.Instance.PlayerDamage();
                     Destroy(this.gameObject);
                     Debug.Log("Hit");
                 }//敵の球がプレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
                 break;
             case BulletGroup.Player:
-                if (CheckHit(CheckTarget(EnemyList.Instance._targetList)))
+                if (CheckHit(_targetObject))
                 {
+                    _enemyStatus = _targetObject.GetComponent<EnemyStatus>();
+                    _enemyStatus.EnemyDamege();
                     Destroy(this.gameObject);
                     Debug.Log("Hit");
                 }//プレイヤーの球が敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
@@ -78,11 +94,11 @@ public class BulletCollider : MonoBehaviour
         _thisPos = this.transform.position;
         _xDistance = _thisPos.x - _targetPos.x;
         _yDistance = _thisPos.y - _targetPos.y;
-        if(_xDistance < 0)
+        if (_xDistance < 0)
         {
             _xDistance *= -1;
         }
-        if(_yDistance < 0)
+        if (_yDistance < 0)
         {
             _yDistance *= -1;
         }
@@ -96,24 +112,27 @@ public class BulletCollider : MonoBehaviour
         }
     }//ターゲットと当たったらtrueを返す当たり判定
 
-    public GameObject CheckTarget(List<GameObject>targetList)
+    public void CheckTarget(List<GameObject> targetList, GameObject targetObject)
     {
-        float targetDistance = default;
+        float targetDistance = float.MaxValue;
         foreach (GameObject target in targetList)
         {
-            float thisDistance = Vector3.Distance(target.transform.position, this.transform.position);
-            if (targetDistance > thisDistance)
+            if(target != null)
             {
-                targetDistance = thisDistance;
-                _targetObject = target;
-            }
-            else if (targetDistance == default)
-            {
-                targetDistance = thisDistance;
-                _targetObject = target;
+                float thisDistance = Vector3.Distance(target.transform.position, this.transform.position);
+                if (targetDistance > thisDistance)
+                {
+                    targetDistance = thisDistance;
+                    _targetObject = target;
+                }
+                else if (targetDistance == default)
+                {
+                    targetDistance = thisDistance;
+                    _targetObject = target;
+                }
+                Debug.Log("ループせいこう");
             }
         }
-        return _targetObject;
     }//一番距離が近い敵をターゲットにする
 
     /// <summary>

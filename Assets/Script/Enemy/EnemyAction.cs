@@ -44,13 +44,16 @@ public class EnemyAction : MonoBehaviour
 
     private void Update()
     {
-        _timer += Time.deltaTime;
-        _targetObjectPosition = _targetObject.transform.position;
-        _distance = Vector3.Distance(_targetObjectPosition, _thisObjectPosition);
-        if(_timer >= _fireDistance && _distance <= _rangeDistance)
+        if (_targetObject != null)
         {
-            _timer = 0;
-            Instantiate(_bullet,_thisObjectPosition, Quaternion.identity);
+            _timer += Time.deltaTime;
+            _targetObjectPosition = _targetObject.transform.position;
+            _distance = Vector3.Distance(_targetObjectPosition, _thisObjectPosition);
+            if (_timer >= _fireDistance && _distance <= _rangeDistance)
+            {
+                _timer = 0;
+                Instantiate(_bullet, _thisObjectPosition, Quaternion.identity);
+            }
         }
     }//プレイヤーが射程距離に入ったら発砲を開始する処理
 }

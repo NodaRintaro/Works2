@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5043104496233658798}
   - component: {fileID: 5383596878220451814}
   - component: {fileID: 8377033461999343459}
+  - component: {fileID: 6931286080976186210}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -100,3 +101,16 @@ MonoBehaviour:
   _targetObject: {fileID: 0}
   _bullet: {fileID: 3719392338146685204, guid: 2c7d7567a67e2f84b9487e8aadc53860, type: 3}
   _rangeDistance: 5
+--- !u!114 &6931286080976186210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456336048907206083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a79c28107598e643911958f4df49227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyLife: 3

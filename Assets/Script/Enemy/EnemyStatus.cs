@@ -9,7 +9,7 @@ public class EnemyStatus : MonoBehaviour
     public void EnemyDamege()
     {
         _enemyLife -= 1;
-        if (_enemyLife == 0)
+        if (_enemyLife <= 0)
         {
             Destroy(this.gameObject);
         }

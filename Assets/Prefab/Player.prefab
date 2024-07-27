@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3432384408708123396}
   - component: {fileID: 6180136183601582681}
   - component: {fileID: 4807869586797896594}
-  - component: {fileID: 595963653691689986}
   - component: {fileID: 1203730938162856414}
   m_Layer: 0
   m_Name: Player
@@ -103,19 +102,6 @@ MonoBehaviour:
   _jumpPower: 0.1
   _bullet: {fileID: 7323651955044928082, guid: 8e4cce6d2c9daec40975b8e57153df2f, type: 3}
   _maxJumpCount: 2
---- !u!114 &595963653691689986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395123527332283271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5364a90f072ea4faf22ad318927bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _life: 5
 --- !u!114 &1203730938162856414
 MonoBehaviour:
   m_ObjectHideFlags: 0
