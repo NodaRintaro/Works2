@@ -11,7 +11,7 @@ public class EnemyList:MonoBehaviour
     /// <summary>
     /// ターゲットのリスト
     /// </summary>
-    public List<GameObject> _targetList = new List<GameObject>();
+    public List<GameObject> _targetList;
 
     private GameObject _target;
 

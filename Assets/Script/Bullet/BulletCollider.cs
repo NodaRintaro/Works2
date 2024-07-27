@@ -56,14 +56,6 @@ public class BulletCollider : MonoBehaviour
         }// 最初のtargetを探す
     }
 
-    public async void FixedUpdate()
-    {
-        if (_bulletGroup == BulletGroup.Player)
-        {
-            CheckTarget(_enemyList._targetList, _targetObject);
-        }
-    }
-
     public void LateUpdate()
     {
         switch (_bulletGroup)
@@ -77,19 +69,27 @@ public class BulletCollider : MonoBehaviour
                 }//敵の球がプレイヤーに当たったらこのオブジェクトを破壊してライフを減らす
                 break;
             case BulletGroup.Player:
-                if (CheckHit(_targetObject))
+                if (_enemyList._targetList != null)
                 {
-                    _enemyStatus = _targetObject.GetComponent<EnemyStatus>();
-                    _enemyStatus.EnemyDamege();
-                    Destroy(this.gameObject);
-                    Debug.Log("Hit");
-                }//プレイヤーの球が敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
+                    CheckTarget(_enemyList._targetList, _targetObject);
+                    if (CheckHit(_targetObject))
+                    {
+                        _enemyStatus = _targetObject.GetComponent<EnemyStatus>();
+                        _enemyStatus.EnemyDamege();
+                        Destroy(this.gameObject);
+                        Debug.Log("Hit");
+                    }//プレイヤーの球が敵に当たったらこのオブジェクトを破壊して敵のライフを減らす
+                }
                 break;
         }
     }
 
     public bool CheckHit(GameObject target)
     {
+        if(target == null)
+        {
+            return false;
+        }
         _targetPos = target.transform.position;
         _thisPos = this.transform.position;
         _xDistance = _thisPos.x - _targetPos.x;
@@ -125,7 +125,7 @@ public class BulletCollider : MonoBehaviour
                     targetDistance = thisDistance;
                     _targetObject = target;
                 }
-                else if (targetDistance == default)
+                else if (targetDistance == float.MaxValue)
                 {
                     targetDistance = thisDistance;
                     _targetObject = target;
