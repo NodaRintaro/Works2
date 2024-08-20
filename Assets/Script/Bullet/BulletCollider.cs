@@ -1,19 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-
-
 public class BulletCollider : MonoBehaviour
 {
     public EnemyList _enemyList;
-    /// <summary>
-    /// このオブジェクトの位置
-    /// </summary>
-    [SerializeField] private Vector2 _thisPos;
-    /// <summary>
-    /// プレイヤーの位置
-    /// </summary>
-    [SerializeField] private Vector2 _targetPos;
     /// <summary>
     /// このオブジェクトの大きさ
     /// </summary>
@@ -86,30 +75,17 @@ public class BulletCollider : MonoBehaviour
 
     public bool CheckHit(GameObject target)
     {
+        Transform targetTransform = target.transform;
         if(target == null)
         {
             return false;
         }
-        _targetPos = target.transform.position;
-        _thisPos = this.transform.position;
-        _xDistance = _thisPos.x - _targetPos.x;
-        _yDistance = _thisPos.y - _targetPos.y;
-        if (_xDistance < 0)
-        {
-            _xDistance *= -1;
-        }
-        if (_yDistance < 0)
-        {
-            _yDistance *= -1;
-        }
-        if (_xDistance < _thisObjectScale + _playerRadius && _yDistance < _thisObjectScale + _playerRadius)
+        if (Mathf.Abs(this.transform.position.x - target.transform.position.x) < (targetTransform.localScale.x + this.transform.localScale.x) / 2 &&
+            Mathf.Abs(this.transform.position.y - target.transform.position.y) < (targetTransform.localScale.y + this.transform.localScale.y) / 2)
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }//ターゲットと当たったらtrueを返す当たり判定
 
     public void CheckTarget(List<GameObject> targetList, GameObject targetObject)
