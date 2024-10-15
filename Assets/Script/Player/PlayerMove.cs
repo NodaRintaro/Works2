@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     /// <summary>
     /// 弾丸のオブジェクト
     /// </summary>
-    [SerializeField] GameObject _bullet = null;
+    //[SerializeField] GameObject _bullet = null;
 
     /// <summary>
     /// ジャンプの回数制限
@@ -70,11 +70,12 @@ public class PlayerMove : MonoBehaviour
         _velocity = new Vector3(axis.x, 0, 0);
     }//移動
 
-    public void OnFire()
-    {
-        Instantiate(_bullet, this.transform.position, Quaternion.identity);
-        Debug.Log("生成!");
-    }//右クリックされたらBulletを生成
+    //public void OnFire()
+    //{
+    //
+    //    Instantiate(_bullet, this.transform.position, Quaternion.AngleAxis(_radian * 180 / Mathf.PI, new Vector3(0, 0, 1)));
+    //    Debug.Log("生成!");
+    //}//右クリックされたらBulletを生成
 
     public void OnJump()
     {

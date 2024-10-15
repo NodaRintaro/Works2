@@ -75,11 +75,11 @@ public class BulletCollider : MonoBehaviour
 
     public bool CheckHit(GameObject target)
     {
-        Transform targetTransform = target.transform;
         if(target == null)
         {
             return false;
         }
+        Transform targetTransform = target.transform;
         if (Mathf.Abs(this.transform.position.x - target.transform.position.x) < (targetTransform.localScale.x + this.transform.localScale.x) / 2 &&
             Mathf.Abs(this.transform.position.y - target.transform.position.y) < (targetTransform.localScale.y + this.transform.localScale.y) / 2)
         {

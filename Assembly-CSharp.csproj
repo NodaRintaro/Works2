@@ -60,8 +60,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.28f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Player\PlayerAngle.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyAction.cs" />
     <Compile Include="Assets\Script\Bullet\BulletCollider.cs" />
+    <Compile Include="Assets\Script\MousePointer\MousePointer.cs" />
     <Compile Include="Assets\Script\Player\PlayerStatus.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyList.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyStatus.cs" />
