@@ -63,6 +63,7 @@
     <Compile Include="Assets\Script\Player\PlayerAngle.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyAction.cs" />
     <Compile Include="Assets\Script\Bullet\BulletCollider.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemySpawn.cs" />
     <Compile Include="Assets\Script\MousePointer\MousePointer.cs" />
     <Compile Include="Assets\Script\Player\PlayerStatus.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyList.cs" />

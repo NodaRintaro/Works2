@@ -16,7 +16,7 @@ public class EnemyList:MonoBehaviour
     private GameObject _target;
 
     private string _newTagName = "EnemyInList";
-    public void Awake()
+    public void Update()
     {
         for (int i = 0; i < 100; i++)
         {

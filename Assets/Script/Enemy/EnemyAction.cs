@@ -37,9 +37,10 @@ public class EnemyAction : MonoBehaviour
     /// </summary>
     private float _timer = 0;
 
-    private void Start()
+    private void Awake()
     {
         _thisObjectPosition = this.gameObject.transform.position;
+        _targetObject = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
